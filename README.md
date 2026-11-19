@@ -40,3 +40,11 @@ gebruik die, dan wordt hij ontdubbeld.
 
 - `src/app/logic/scoring.ts`: gat = max(0, streefniveau − score); top 3 = grootste gat, gelijkspel op config-volgorde.
 - `src/app/logic/voorstel.ts`: kiest per prioriteit het catalogusitem voor de stap score → score+1 en maakt de Markdown.
+
+## Huisstijl
+
+Kleuren staan als CSS-variabelen bovenin `src/styles.css` (`--ss-rood`, `--ss-oranje`, `--ss-donker`).
+Dit zijn de logokleuren zoals bekend uit openbare bronnen; controleer ze tegen de officiële
+Sopra Steria-brandguide. Rood/oranje betekenen in de resultaatgrafiek ook "groot/klein gat".
+Er wordt bewust geen webfont of logo geladen (offline). Logo toevoegen: zet het officiële bestand
+in `public/` en voeg een `<img>` toe in de kop van `src/app/app.html`.

@@ -4,10 +4,17 @@
   --rand: #9ca3af;
   --vlak: #f3f4f6;
   --achtergrond: #ffffff;
-  --primair: #12355b;
+  /* Sopra Steria-kleuren (logo): rood, oranje, donker. Controleer tegen de officiële brandguide. */
+  --ss-rood: #cf022b;
+  --ss-oranje: #ef7d00;
+  --ss-donker: #1a1d1d;
+  --ss-verloop: linear-gradient(90deg, var(--ss-rood), var(--ss-oranje));
+  --primair: var(--ss-donker);
   --ok: #1b7a3a;
-  --klein: #c26a00;
-  --groot: #b42318;
+  --klein: var(--ss-oranje);
+  --klein-tekst: #a85800; /* donkerder oranje voor tekst: voldoende contrast op wit */
+  --groot: var(--ss-rood);
+  --accentvlak: #fdf1f3;
 }
 * { box-sizing: border-box; }
 html { font-size: 20px; } /* groot voor beamer */
