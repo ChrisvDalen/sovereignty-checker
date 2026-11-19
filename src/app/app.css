@@ -1,0 +1,89 @@
+.kop {
+  background: var(--primair);
+  color: #fff;
+  padding: 1rem 2rem;
+}
+.kop h1 { margin: 0 0 0.75rem; font-size: 1.6rem; }
+.stappen { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.stappen button { background: transparent; border-color: #fff; }
+.stappen button.actief { background: #fff; color: var(--primair); }
+
+main { max-width: 1200px; margin: 0 auto; padding: 1.5rem 2rem 3rem; }
+h2 { margin: 0; font-size: 1.4rem; }
+
+.balk { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.25rem; }
+.balk h2 { flex: 1; }
+.balk.einde { justify-content: space-between; margin-top: 1.5rem; }
+.klant { display: flex; align-items: center; gap: 0.5rem; font-weight: 600; flex: 1; }
+.klant input { flex: 1; min-width: 12rem; }
+.streef { font-weight: 600; display: flex; align-items: center; gap: 0.5rem; }
+
+/* Stap 1 */
+.domein { border: 2px solid var(--rand); border-radius: 8px; padding: 1rem 1.25rem; margin: 0 0 1.25rem; }
+.domein legend { font-size: 1.2rem; font-weight: 700; padding: 0 0.4rem; }
+.uitleg { margin: 0 0 0.75rem; color: var(--zacht); }
+.levels { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.6rem; }
+.level {
+  display: flex; flex-direction: column; gap: 0.25rem;
+  border: 2px solid var(--rand); border-radius: 6px; padding: 0.6rem 0.7rem;
+  cursor: pointer; font-size: 0.85rem;
+}
+.level input { position: absolute; opacity: 0; }
+.level strong { font-size: 1rem; }
+.level.gekozen { border-color: var(--primair); background: #e6eef8; box-shadow: inset 0 0 0 2px var(--primair); }
+.level:has(input:focus-visible) { outline: 3px solid #f5b400; }
+.toelichting { display: flex; flex-direction: column; gap: 0.25rem; margin-top: 0.75rem; font-size: 0.85rem; font-weight: 600; }
+.toelichting textarea { font-weight: 400; }
+
+/* Stap 2 */
+.grafiek { display: flex; flex-direction: column; gap: 0.8rem; }
+.rij { display: grid; grid-template-columns: 16rem 1fr 9rem; align-items: center; gap: 1rem; }
+.naam { font-weight: 600; }
+.spoor { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); gap: 3px; height: 2.2rem; }
+.vak { background: var(--vlak); border: 1px solid #d1d5db; }
+.vak.gevuld.ok { background: var(--ok); }
+.vak.gevuld.klein { background: var(--klein); }
+.vak.gevuld.groot { background: var(--groot); }
+.streeflijn { position: absolute; top: -0.35rem; bottom: -0.35rem; width: 4px; margin-left: -2px; background: var(--tekst); }
+.waarde { font-weight: 700; }
+.waarde.ok { color: var(--ok); }
+.waarde.klein { color: var(--klein); }
+.waarde.groot { color: var(--groot); }
+.waarde.leeg { color: var(--zacht); font-weight: 400; }
+.legenda { display: flex; align-items: center; gap: 0.5rem 1rem; flex-wrap: wrap; margin-top: 1.25rem; color: var(--zacht); font-size: 0.85rem; }
+.stip { display: inline-block; width: 1rem; height: 1rem; margin-left: 0.5rem; }
+.stip.ok { background: var(--ok); }
+.stip.klein { background: var(--klein); }
+.stip.groot { background: var(--groot); }
+.lijn { display: inline-block; width: 4px; height: 1.2rem; background: var(--tekst); margin-left: 0.5rem; }
+
+/* Stap 3 */
+.samenvatting {
+  font-size: 1.2rem; font-weight: 600;
+  background: #fff4e5; border-left: 6px solid var(--klein);
+  padding: 0.8rem 1rem; margin: 0 0 1.5rem;
+}
+.prioriteit { border: 2px solid var(--rand); border-radius: 8px; padding: 1rem 1.25rem; margin-bottom: 1.25rem; }
+.prioriteit h3 { margin: 0 0 0.6rem; font-size: 1.3rem; display: flex; align-items: baseline; gap: 0.6rem; flex-wrap: wrap; }
+.prioriteit h3 small { font-size: 0.9rem; color: var(--zacht); font-weight: 600; }
+.nr {
+  display: inline-grid; place-items: center; width: 2rem; height: 2rem;
+  border-radius: 50%; background: var(--primair); color: #fff; font-size: 1rem;
+}
+.prioriteit p { margin: 0.5rem 0; }
+blockquote { margin: 0.4rem 0 0.8rem; padding: 0.4rem 0.8rem; border-left: 4px solid var(--rand); color: var(--zacht); font-style: italic; }
+.pov { background: var(--vlak); border-radius: 6px; padding: 0.6rem 1rem; margin: 0.6rem 0; }
+.pov h4 { margin: 0 0 0.3rem; }
+.pov dl { display: grid; grid-template-columns: 11rem 1fr; gap: 0.2rem 1rem; margin: 0; }
+.pov dt { font-weight: 600; }
+.pov dd { margin: 0; }
+.afh { color: var(--zacht); font-size: 0.9rem; }
+.solution { border: 3px solid var(--primair); border-radius: 8px; padding: 1rem 1.25rem; background: #e6eef8; }
+.solution h3 { margin: 0 0 0.3rem; font-size: 1.3rem; }
+.solution li { margin: 0.3rem 0; font-weight: 600; }
+
+@media (max-width: 800px) {
+  .levels { grid-template-columns: 1fr 1fr; }
+  .rij { grid-template-columns: 1fr; gap: 0.3rem; }
+  .pov dl { grid-template-columns: 1fr; }
+}

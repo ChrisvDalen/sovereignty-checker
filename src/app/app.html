@@ -1,0 +1,171 @@
+<header class="kop">
+  <h1>Soevereiniteitsassessment → Solution-voorstel</h1>
+  <nav class="stappen" aria-label="Stappen">
+    <button [class.actief]="stap() === 1" (click)="gaNaar(1)">1. Assessment</button>
+    <button [class.actief]="stap() === 2" (click)="gaNaar(2)">2. Resultaat</button>
+    <button [class.actief]="stap() === 3" (click)="gaNaar(3)">3. Solution-voorstel</button>
+  </nav>
+</header>
+
+<main>
+  @switch (stap()) {
+    <!-- STAP 1: ASSESSMENT -->
+    @case (1) {
+      <section>
+        <div class="balk">
+          <label class="klant">
+            Klant
+            <input
+              type="text"
+              placeholder="Naam organisatie"
+              [value]="klantnaam()"
+              (input)="klantnaam.set($any($event.target).value)"
+            />
+          </label>
+          <button class="secundair" (click)="laadVoorbeeldklant()">Laad voorbeeldklant</button>
+          <button class="secundair" (click)="wisAssessment()">Wissen</button>
+        </div>
+
+        @for (d of domeinen; track d.id) {
+          <fieldset class="domein">
+            <legend>{{ d.naam }}</legend>
+            <p class="uitleg">{{ d.beschrijving }}</p>
+            <div class="levels">
+              @for (l of levels; track l) {
+                <label class="level" [class.gekozen]="scores()[d.id] === l">
+                  <input
+                    type="radio"
+                    [name]="d.id"
+                    [value]="l"
+                    [checked]="scores()[d.id] === l"
+                    (change)="zetScore(d.id, l)"
+                  />
+                  <strong>{{ l }}. {{ levelNamen[l - 1] }}</strong>
+                  <span>{{ d.levels[l - 1] }}</span>
+                </label>
+              }
+            </div>
+            <label class="toelichting">
+              Toelichting (optioneel)
+              <textarea
+                rows="2"
+                [value]="toelichtingen()[d.id] ?? ''"
+                (input)="zetToelichting(d.id, $any($event.target).value)"
+              ></textarea>
+            </label>
+          </fieldset>
+        }
+
+        <div class="balk einde">
+          <span>{{ aantalIngevuld() }} van {{ domeinen.length }} domeinen ingevuld</span>
+          <button (click)="gaNaar(2)">Naar resultaat →</button>
+        </div>
+      </section>
+    }
+
+    <!-- STAP 2: RESULTAAT -->
+    @case (2) {
+      <section>
+        <div class="balk">
+          <h2>Resultaat{{ klantnaam() ? ' — ' + klantnaam() : '' }}</h2>
+          <label class="streef">
+            Streefniveau
+            <select (change)="streefniveau.set(+$any($event.target).value)">
+              @for (l of levels; track l) {
+                <option [value]="l" [selected]="l === streefniveau()">{{ l }}. {{ levelNamen[l - 1] }}</option>
+              }
+            </select>
+          </label>
+        </div>
+
+        <div class="grafiek" role="list">
+          @for (g of gaten(); track g.domein.id) {
+            <div class="rij" role="listitem">
+              <span class="naam">{{ g.domein.naam }}</span>
+              <div class="spoor">
+                @for (l of levels; track l) {
+                  <span class="vak" [class.gevuld]="g.score !== null && l <= g.score" [class]="status(g.score, g.gat)"></span>
+                }
+                <span class="streeflijn" [style.left.%]="(streefniveau() / 4) * 100"></span>
+              </div>
+              <span class="waarde" [class]="status(g.score, g.gat)">
+                @if (g.score === null) {
+                  niet ingevuld
+                } @else if (g.gat === 0) {
+                  {{ g.score }} ✓
+                } @else {
+                  {{ g.score }} · gat {{ g.gat }}
+                }
+              </span>
+            </div>
+          }
+        </div>
+
+        <p class="legenda">
+          <span class="stip ok"></span> op/boven streefniveau
+          <span class="stip klein"></span> 1 level onder
+          <span class="stip groot"></span> 2+ levels onder
+          <span class="lijn"></span> streefniveau
+        </p>
+
+        <div class="balk einde">
+          <button class="secundair" (click)="gaNaar(1)">← Assessment</button>
+          <button (click)="gaNaar(3)">Naar solution-voorstel →</button>
+        </div>
+      </section>
+    }
+
+    <!-- STAP 3: SOLUTION-VOORSTEL -->
+    @case (3) {
+      <section>
+        <div class="balk">
+          <h2>Solution-voorstel{{ klantnaam() ? ' — ' + klantnaam() : '' }}</h2>
+          <button (click)="exporteerMarkdown()">Exporteer als Markdown</button>
+        </div>
+
+        <p class="samenvatting">{{ samenvatting() }}</p>
+
+        @for (p of voorstel().prioriteiten; track p.domein.id; let i = $index) {
+          <article class="prioriteit">
+            <h3>
+              <span class="nr">{{ i + 1 }}</span> {{ p.domein.naam }}
+              <small>level {{ p.score }} → {{ p.score + 1 }} · gat {{ p.gat }}</small>
+            </h3>
+            @if (p.toelichting) {
+              <blockquote>Klant: “{{ p.toelichting }}”</blockquote>
+            }
+            <p><strong>Aanpak:</strong> {{ p.item.aanpak }}</p>
+            <div class="pov">
+              <h4>Proof of value</h4>
+              <dl>
+                <dt>Scope</dt><dd>{{ p.item.proofOfValue.scope }}</dd>
+                <dt>Doorlooptijd</dt><dd>{{ p.item.proofOfValue.duur }}</dd>
+                <dt>Succescriterium</dt><dd>{{ p.item.proofOfValue.succescriterium }}</dd>
+              </dl>
+            </div>
+            <p><strong>Herbruikbare component:</strong> {{ p.item.herbruikbareComponent }}</p>
+            <p class="afh"><strong>Afhankelijkheden:</strong> {{ p.item.afhankelijkheden.join('; ') }}</p>
+          </article>
+        } @empty {
+          <p>Geen domeinen onder streefniveau. Vul het assessment in of verhoog het streefniveau.</p>
+        }
+
+        @if (voorstel().herbruikbareComponenten.length) {
+          <aside class="solution">
+            <h3>Herbruikbare solution</h3>
+            <p>Input voor een solution die voor meerdere klanten bruikbaar is:</p>
+            <ul>
+              @for (c of voorstel().herbruikbareComponenten; track c) {
+                <li>{{ c }}</li>
+              }
+            </ul>
+          </aside>
+        }
+
+        <div class="balk einde">
+          <button class="secundair" (click)="gaNaar(2)">← Resultaat</button>
+        </div>
+      </section>
+    }
+  }
+</main>

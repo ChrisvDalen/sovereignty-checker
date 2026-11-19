@@ -1,0 +1,43 @@
+:root {
+  --tekst: #111827;
+  --zacht: #4b5563;
+  --rand: #9ca3af;
+  --vlak: #f3f4f6;
+  --achtergrond: #ffffff;
+  --primair: #12355b;
+  --ok: #1b7a3a;
+  --klein: #c26a00;
+  --groot: #b42318;
+}
+* { box-sizing: border-box; }
+html { font-size: 20px; } /* groot voor beamer */
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  color: var(--tekst);
+  background: var(--achtergrond);
+  line-height: 1.45;
+}
+button {
+  font: inherit;
+  font-weight: 600;
+  padding: 0.5rem 1.1rem;
+  border: 2px solid var(--primair);
+  border-radius: 6px;
+  background: var(--primair);
+  color: #fff;
+  cursor: pointer;
+}
+button.secundair { background: #fff; color: var(--primair); }
+button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+  outline: 3px solid #f5b400;
+  outline-offset: 2px;
+}
+input[type='text'], select, textarea {
+  font: inherit;
+  padding: 0.4rem 0.6rem;
+  border: 2px solid var(--rand);
+  border-radius: 6px;
+  color: var(--tekst);
+  background: #fff;
+}
