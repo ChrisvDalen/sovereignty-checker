@@ -3,7 +3,8 @@ import {
   DOMEINEN,
   LEVEL_NAMEN,
   STANDAARD_STREEFNIVEAU,
-  VOORBEELDKLANT,
+  Voorbeeldklant,
+  VOORBEELDKLANTEN,
 } from './assessment.config';
 import { CATALOGUS } from './solution-catalog';
 import { berekenGaten } from './logic/scoring';
@@ -20,6 +21,7 @@ export class App {
   protected readonly domeinen = DOMEINEN;
   protected readonly levelNamen = LEVEL_NAMEN;
   protected readonly levels = [1, 2, 3, 4];
+  protected readonly voorbeeldklanten = VOORBEELDKLANTEN;
 
   protected readonly stap = signal<Stap>(1);
   protected readonly klantnaam = signal('');
@@ -56,13 +58,19 @@ export class App {
     this.toelichtingen.update((t) => ({ ...t, [id]: tekst }));
   }
 
-  protected laadVoorbeeldklant() {
-    this.klantnaam.set(VOORBEELDKLANT.klantnaam);
-    this.scores.set({ ...VOORBEELDKLANT.scores });
-    this.toelichtingen.set({ ...VOORBEELDKLANT.toelichtingen });
+  protected readonly geladenVoorbeeld = signal<string | null>(null);
+
+  protected laadVoorbeeldklant(k: Voorbeeldklant) {
+    this.klantnaam.set(k.klantnaam);
+    this.scores.set({ ...k.scores });
+    this.toelichtingen.set({ ...k.toelichtingen });
+    this.streefniveau.set(k.streefniveau);
+    this.geladenVoorbeeld.set(k.id);
   }
 
   protected wisAssessment() {
+    this.geladenVoorbeeld.set(null);
+    this.streefniveau.set(STANDAARD_STREEFNIVEAU);
     this.klantnaam.set('');
     this.scores.set({});
     this.toelichtingen.set({});

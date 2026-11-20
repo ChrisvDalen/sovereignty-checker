@@ -47,6 +47,9 @@ h2::after {
 .balk.einde { justify-content: space-between; margin-top: 1.5rem; }
 .klant { display: flex; align-items: center; gap: 0.5rem; font-weight: 600; flex: 1; }
 .klant input { flex: 1; min-width: 12rem; }
+.voorbeelden { gap: 0.6rem; margin-top: -0.5rem; }
+.voorbeelden-label { font-weight: 600; margin-right: 0.25rem; }
+button.secundair.actief { background: var(--ss-lila-vlak); border-color: var(--ss-paars-donker); box-shadow: inset 0 0 0 1px var(--ss-paars-donker); }
 .streef { font-weight: 600; display: flex; align-items: center; gap: 0.5rem; }
 
 /* Stap 1 */

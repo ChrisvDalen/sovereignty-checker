@@ -26,8 +26,15 @@
               (input)="klantnaam.set($any($event.target).value)"
             />
           </label>
-          <button class="secundair" (click)="laadVoorbeeldklant()">Laad voorbeeldklant</button>
           <button class="secundair" (click)="wisAssessment()">Wissen</button>
+        </div>
+        <div class="balk voorbeelden">
+          <span class="voorbeelden-label">Laad voorbeeldklant:</span>
+          @for (k of voorbeeldklanten; track k.id) {
+            <button class="secundair" [class.actief]="geladenVoorbeeld() === k.id" (click)="laadVoorbeeldklant(k)">
+              {{ k.label }}
+            </button>
+          }
         </div>
 
         @for (d of domeinen; track d.id) {

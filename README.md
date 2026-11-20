@@ -12,7 +12,7 @@ npm start          # http://localhost:4200
 npm test -- --watch=false
 ```
 
-In de app: **Laad voorbeeldklant** → **Naar resultaat** → **Naar solution-voorstel** → **Exporteer als Markdown**.
+In de app: kies een voorbeeldklant (Gemeente, Waterschap, Uitvoeringsorganisatie, Ministerie) → **Naar resultaat** → **Naar solution-voorstel** → **Exporteer als Markdown**.
 
 ## Assessment vervangen
 
@@ -22,7 +22,7 @@ Alles staat in `src/app/assessment.config.ts`:
   De volgorde van deze lijst is ook de tiebreak bij gelijke gaten.
 - `LEVEL_NAMEN`: de labels voor level 1–4.
 - `STANDAARD_STREEFNIVEAU`: startwaarde van het streefniveau (in de app instelbaar bij Resultaat).
-- `VOORBEELDKLANT`: scores en toelichtingen achter de knop "Laad voorbeeldklant".
+- `VOORBEELDKLANTEN`: de demo-cases (fictief). Elke case krijgt automatisch een knop; per case `label`, `klantnaam`, `streefniveau`, `scores` en `toelichtingen`. Een case toevoegen = een object toevoegen. `npm test` controleert dat elke case volledig is en een eigen top 3 oplevert.
 
 Voeg je een domein toe of wijzig je een `id`, voeg dan ook een catalogusblok met hetzelfde `id` toe.
 `npm test` faalt als de catalogus niet compleet is.
