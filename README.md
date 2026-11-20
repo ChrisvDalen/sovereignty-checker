@@ -43,8 +43,14 @@ gebruik die, dan wordt hij ontdubbeld.
 
 ## Huisstijl
 
-Kleuren staan als CSS-variabelen bovenin `src/styles.css` (`--ss-rood`, `--ss-oranje`, `--ss-donker`).
-Dit zijn de logokleuren zoals bekend uit openbare bronnen; controleer ze tegen de officiële
-Sopra Steria-brandguide. Rood/oranje betekenen in de resultaatgrafiek ook "groot/klein gat".
-Er wordt bewust geen webfont of logo geladen (offline). Logo toevoegen: zet het officiële bestand
-in `public/` en voeg een `<img>` toe in de kop van `src/app/app.html`.
+Afgeleid van de stylesheet van soprasteria.com (november 2026). Alles staat als CSS-variabelen
+bovenin `src/styles.css`:
+
+- tekst en primaire knoppen donkerpaars `#2a1449`; randen lila `#9179b1`, vlakken `#ede9f2` / `#fdf2e5`
+- merkverloop paars → magenta → rood → oranje (`--ss-verloop`) onder de kop, onder h2 en op het actieve tabblad
+- vierkante hoeken, knoppen in hoofdletters, witte kop met lila schaduw
+- logo: `public/logo-soprasteria.svg` (officiële SVG van soprasteria.com)
+- resultaatgrafiek: paars = op streefniveau, oranje = 1 level onder, rood = 2+ levels onder
+
+Het huisfont (Hurme Geometric Sans) is een gelicentieerd font en wordt niet meegeleverd.
+Is het lokaal geïnstalleerd, dan gebruikt de app het automatisch; anders een geometrische fallback.

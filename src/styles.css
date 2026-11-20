@@ -1,50 +1,76 @@
+/*
+ * Sopra Steria-huisstijl, afgeleid van de stylesheet van soprasteria.com (nov 2026).
+ * Alle kleuren als variabelen; pas hier aan, niet in componenten.
+ */
 :root {
-  --tekst: #111827;
-  --zacht: #4b5563;
-  --rand: #9ca3af;
-  --vlak: #f3f4f6;
-  --achtergrond: #ffffff;
-  /* Sopra Steria-kleuren (logo): rood, oranje, donker. Controleer tegen de officiële brandguide. */
-  --ss-rood: #cf022b;
+  --ss-paars-donker: #2a1449; /* tekst, primaire knoppen */
+  --ss-paars: #492d7b;
+  --ss-magenta: #8c2c84;
+  --ss-rood: #ce2935;
+  --ss-rood-donker: #a60726;
   --ss-oranje: #ef7d00;
-  --ss-donker: #1a1d1d;
-  --ss-verloop: linear-gradient(90deg, var(--ss-rood), var(--ss-oranje));
-  --primair: var(--ss-donker);
-  --ok: #1b7a3a;
+  --ss-lila: #9179b1; /* randen van knoppen */
+  --ss-lila-licht: #dad2e5; /* hover, schaduw */
+  --ss-lila-vlak: #ede9f2;
+  --ss-oranje-vlak: #fdf2e5;
+  --ss-grijs-vlak: #f2f2f2;
+  --ss-verloop: linear-gradient(89.84deg, #492d7b 0.11%, #8c2c84 14.07%, #ce2935 72.91%, #ec7f31 99.84%);
+
+  --tekst: var(--ss-paars-donker);
+  --zacht: #5b4a73;
+  --rand: var(--ss-lila-licht);
+
+  /* Status in de resultaatgrafiek (merkkleuren als heat-schaal) */
+  --ok: var(--ss-paars);
   --klein: var(--ss-oranje);
-  --klein-tekst: #a85800; /* donkerder oranje voor tekst: voldoende contrast op wit */
+  --klein-tekst: #a85800; /* donkerder oranje: voldoende contrast als tekst op wit */
   --groot: var(--ss-rood);
-  --accentvlak: #fdf1f3;
+  --groot-tekst: var(--ss-rood-donker);
+
+  /* Huisfont wordt gebruikt als het lokaal geïnstalleerd is; anders een geometrische fallback. */
+  --font: 'Hurme Geometric Sans 3', 'Hurme Geometric Sans 4', 'Century Gothic', 'Avenir Next', Futura,
+    system-ui, sans-serif;
+  --font-kop: 'Hurme Geometric Sans 4', 'Hurme Geometric Sans 3', 'Century Gothic', 'Avenir Next',
+    Futura, system-ui, sans-serif;
 }
 * { box-sizing: border-box; }
 html { font-size: 20px; } /* groot voor beamer */
 body {
   margin: 0;
-  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  font-family: var(--font);
   color: var(--tekst);
-  background: var(--achtergrond);
+  background: #fff;
   line-height: 1.45;
 }
+h1, h2, h3, h4, legend { font-family: var(--font-kop); font-weight: 600; }
+
+/* Knoppen: vierkant, hoofdletters, lila rand (zoals soprasteria.com) */
 button {
   font: inherit;
+  font-family: var(--font-kop);
+  font-size: 0.8rem;
   font-weight: 600;
-  padding: 0.5rem 1.1rem;
-  border: 2px solid var(--primair);
-  border-radius: 6px;
-  background: var(--primair);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.6rem 1.1rem;
+  border: 2px solid var(--ss-paars-donker);
+  border-radius: 0;
+  background: var(--ss-paars-donker);
   color: #fff;
   cursor: pointer;
 }
-button.secundair { background: #fff; color: var(--primair); }
+button:hover { background: var(--ss-paars); border-color: var(--ss-paars); }
+button.secundair { background: #fff; color: var(--ss-paars-donker); border-color: var(--ss-lila); }
+button.secundair:hover { background: var(--ss-lila-licht); }
 button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
-  outline: 3px solid #f5b400;
+  outline: 3px solid var(--ss-oranje);
   outline-offset: 2px;
 }
 input[type='text'], select, textarea {
   font: inherit;
-  padding: 0.4rem 0.6rem;
-  border: 2px solid var(--rand);
-  border-radius: 6px;
+  padding: 0.45rem 0.6rem;
+  border: 2px solid var(--ss-lila);
+  border-radius: 0;
   color: var(--tekst);
   background: #fff;
 }
